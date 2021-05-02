@@ -39,7 +39,6 @@ export const isCombineEqual = (first: ?Combine, second: ?Combine): boolean => {
   );
 };
 
-// @here
 export const isCriticalEqual = (first: Critical, second: Critical): boolean => {
   if (first === second) {
     return true;
