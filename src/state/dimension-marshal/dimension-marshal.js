@@ -26,6 +26,7 @@ import type {
   DraggableDescriptor,
 } from '../../types';
 import { warning } from '../../dev-warning';
+import { isMatchingType } from '../../is-matching-type';
 
 type Collection = {|
   critical: Critical,
@@ -42,7 +43,7 @@ function shouldPublishUpdate(
     return false;
   }
   // do not publish updates for draggables that are not of a type that we care about
-  if (entry.descriptor.type !== dragging.type) {
+  if (!isMatchingType(entry.descriptor.type, dragging.type)) {
     return false;
   }
 

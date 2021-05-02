@@ -32,9 +32,7 @@ import whatIsDraggedOver from '../../state/droppable/what-is-dragged-over';
 import { updateViewportMaxScroll as updateViewportMaxScrollAction } from '../../state/action-creators';
 import StoreContext from '../context/store-context';
 import whatIsDraggedOverFromResult from '../../state/droppable/what-is-dragged-over-from-result';
-
-const isMatchingType = (type: TypeId, critical: Critical): boolean =>
-  type === critical.droppable.type;
+import { isMatchingType } from '../../is-matching-type';
 
 const getDraggable = (
   critical: Critical,
@@ -144,7 +142,7 @@ export const makeMapStateToProps = (): Selector => {
 
     if (state.isDragging) {
       const critical: Critical = state.critical;
-      if (!isMatchingType(type, critical)) {
+      if (!isMatchingType(type, critical.droppable.type)) {
         return idleWithoutAnimation;
       }
 
@@ -166,7 +164,7 @@ export const makeMapStateToProps = (): Selector => {
 
     if (state.phase === 'DROP_ANIMATING') {
       const completed: CompletedDrag = state.completed;
-      if (!isMatchingType(type, completed.critical)) {
+      if (!isMatchingType(type, completed.critical.droppable.type)) {
         return idleWithoutAnimation;
       }
 
@@ -190,7 +188,7 @@ export const makeMapStateToProps = (): Selector => {
 
     if (state.phase === 'IDLE' && state.completed && !state.shouldFlush) {
       const completed: CompletedDrag = state.completed;
-      if (!isMatchingType(type, completed.critical)) {
+      if (!isMatchingType(type, completed.critical.droppable.type)) {
         return idleWithoutAnimation;
       }
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { colors } from '@atlaskit/theme';
-import { Droppable, Draggable } from '../../../src';
+import { Droppable, Draggable, type TypeId } from '../../../src';
 import QuoteItem from './quote-item';
 import { grid } from '../constants';
 import Title from './title';
@@ -66,7 +66,7 @@ const Container = styled.div``;
 
 type Props = {|
   listId?: string,
-  listType?: string,
+  listType?: TypeId,
   quotes: Quote[],
   title?: string,
   internalScroll?: boolean,

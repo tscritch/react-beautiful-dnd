@@ -1,5 +1,6 @@
 // @flow
 import type { Critical, DraggableLocation, Combine } from '../../../types';
+import { isMatchingType } from '../../../is-matching-type';
 
 export const areLocationsEqual = (
   first: ?DraggableLocation,
@@ -38,6 +39,7 @@ export const isCombineEqual = (first: ?Combine, second: ?Combine): boolean => {
   );
 };
 
+// @here
 export const isCriticalEqual = (first: Critical, second: Critical): boolean => {
   if (first === second) {
     return true;
@@ -46,12 +48,12 @@ export const isCriticalEqual = (first: Critical, second: Critical): boolean => {
   const isDraggableEqual: boolean =
     first.draggable.id === second.draggable.id &&
     first.draggable.droppableId === second.draggable.droppableId &&
-    first.draggable.type === second.draggable.type &&
+    isMatchingType(first.draggable.type, second.draggable.type) &&
     first.draggable.index === second.draggable.index;
 
   const isDroppableEqual: boolean =
     first.droppable.id === second.droppable.id &&
-    first.droppable.type === second.droppable.type;
+    isMatchingType(first.droppable.type, second.droppable.type);
 
   return isDraggableEqual && isDroppableEqual;
 };

@@ -14,6 +14,7 @@ import type {
   DroppableEntryMap,
 } from './registry-types';
 import { values } from '../../native-with-fallback';
+import { isMatchingType } from '../../is-matching-type';
 
 type EntryMap = {
   draggables: DraggableEntryMap,
@@ -102,8 +103,8 @@ export default function createRegistry(): Registry {
     findById: findDraggableById,
     exists: (id: DraggableId): boolean => Boolean(findDraggableById(id)),
     getAllByType: (type: TypeId): DraggableEntry[] =>
-      values(entries.draggables).filter(
-        (entry: DraggableEntry): boolean => entry.descriptor.type === type,
+      values(entries.draggables).filter((entry: DraggableEntry): boolean =>
+        isMatchingType(entry.descriptor.type, type),
       ),
   };
 
@@ -140,8 +141,8 @@ export default function createRegistry(): Registry {
     findById: findDroppableById,
     exists: (id: DroppableId): boolean => Boolean(findDroppableById(id)),
     getAllByType: (type: TypeId): DroppableEntry[] =>
-      values(entries.droppables).filter(
-        (entry: DroppableEntry): boolean => entry.descriptor.type === type,
+      values(entries.droppables).filter((entry: DroppableEntry): boolean =>
+        isMatchingType(entry.descriptor.type, type),
       ),
   };
 
