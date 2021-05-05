@@ -54,24 +54,24 @@ export default class Board extends Component<Props, State> {
   boardRef: ?HTMLElement;
 
   onDragEnd = (result: DropResult) => {
-    if (result.combine) {
-      if (result.type === 'COLUMN') {
-        const shallow: string[] = [...this.state.ordered];
-        shallow.splice(result.source.index, 1);
-        this.setState({ ordered: shallow });
-        return;
-      }
+    // if (result.combine) {
+    //   if (result.type === 'COLUMN') {
+    //     const shallow: string[] = [...this.state.ordered];
+    //     shallow.splice(result.source.index, 1);
+    //     this.setState({ ordered: shallow });
+    //     return;
+    //   }
 
-      const column: Quote[] = this.state.columns[result.source.droppableId];
-      const withQuoteRemoved: Quote[] = [...column];
-      withQuoteRemoved.splice(result.source.index, 1);
-      const columns: QuoteMap = {
-        ...this.state.columns,
-        [result.source.droppableId]: withQuoteRemoved,
-      };
-      this.setState({ columns });
-      return;
-    }
+    //   const column: Quote[] = this.state.columns[result.source.droppableId];
+    //   const withQuoteRemoved: Quote[] = [...column];
+    //   withQuoteRemoved.splice(result.source.index, 1);
+    //   const columns: QuoteMap = {
+    //     ...this.state.columns,
+    //     [result.source.droppableId]: withQuoteRemoved,
+    //   };
+    //   this.setState({ columns });
+    //   return;
+    // }
 
     // dropped nowhere
     if (!result.destination) {
@@ -90,32 +90,32 @@ export default class Board extends Component<Props, State> {
     }
 
     // reordering column
-    if (
-      (Array.isArray(result.type) && result.type.includes('COLUMN')) ||
-      result.type === 'COLUMN'
-    ) {
-      const ordered: string[] = reorder(
-        this.state.ordered,
-        source.index,
-        destination.index,
-      );
+    // if (
+    //   (Array.isArray(result.type) && result.type.includes('COLUMN')) ||
+    //   result.type === 'COLUMN'
+    // ) {
+    //   const ordered: string[] = reorder(
+    //     this.state.ordered,
+    //     source.index,
+    //     destination.index,
+    //   );
 
-      this.setState({
-        ordered,
-      });
+    //   this.setState({
+    //     ordered,
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
-    const data = reorderQuoteMap({
-      quoteMap: this.state.columns,
-      source,
-      destination,
-    });
+    // const data = reorderQuoteMap({
+    //   quoteMap: this.state.columns,
+    //   source,
+    //   destination,
+    // });
 
-    this.setState({
-      columns: data.quoteMap,
-    });
+    // this.setState({
+    //   columns: data.quoteMap,
+    // });
   };
 
   render() {
@@ -131,7 +131,7 @@ export default class Board extends Component<Props, State> {
     const board = (
       <Droppable
         droppableId="board"
-        type="COLUMN"
+        type="COLUMN:QUOTE"
         direction="horizontal"
         ignoreContainerClipping={Boolean(containerHeight)}
         isCombineEnabled={isCombineEnabled}

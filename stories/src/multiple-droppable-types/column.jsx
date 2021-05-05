@@ -59,7 +59,7 @@ export default class Column extends Component<Props> {
             </Header>
             <QuoteList
               listId={title}
-              listType={['QUOTE', 'COLUMN']}
+              listType="QUOTE"
               style={{
                 backgroundColor: snapshot.isDragging ? colors.G50 : null,
               }}
