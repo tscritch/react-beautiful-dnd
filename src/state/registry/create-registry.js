@@ -103,9 +103,10 @@ export default function createRegistry(): Registry {
     findById: findDraggableById,
     exists: (id: DraggableId): boolean => Boolean(findDraggableById(id)),
     getAllByType: (type: TypeId): DraggableEntry[] =>
-      values(entries.draggables).filter((entry: DraggableEntry): boolean =>
-        isMatchingType(entry.descriptor.type, type),
-      ),
+      values(entries.draggables).filter((entry: DraggableEntry): boolean => {
+        console.log('draggable drag, drag');
+        return isMatchingType(entry.descriptor.type, type);
+      }),
   };
 
   function findDroppableById(id: DroppableId): ?DroppableEntry {
@@ -141,9 +142,10 @@ export default function createRegistry(): Registry {
     findById: findDroppableById,
     exists: (id: DroppableId): boolean => Boolean(findDroppableById(id)),
     getAllByType: (type: TypeId): DroppableEntry[] =>
-      values(entries.droppables).filter((entry: DroppableEntry): boolean =>
-        isMatchingType(entry.descriptor.type, type),
-      ),
+      values(entries.droppables).filter((entry: DroppableEntry): boolean => {
+        console.log('droppable api? drop, drop');
+        return isMatchingType(entry.descriptor.type, type);
+      }),
   };
 
   function clean(): void {

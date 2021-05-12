@@ -172,6 +172,7 @@ export type PublicOwnProps = {|
 export type PrivateOwnProps = {|
   ...PublicOwnProps,
   isClone: boolean,
+  type?: string,
   // no longer optional
   isEnabled: boolean,
   canDragInteractiveElements: boolean,

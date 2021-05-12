@@ -142,7 +142,8 @@ export const makeMapStateToProps = (): Selector => {
 
     if (state.isDragging) {
       const critical: Critical = state.critical;
-      if (!isMatchingType(type, critical.droppable.type)) {
+      console.log('is dragging: drop, drag?');
+      if (!isMatchingType(critical.droppable.type, type)) {
         return idleWithoutAnimation;
       }
 
@@ -164,7 +165,8 @@ export const makeMapStateToProps = (): Selector => {
 
     if (state.phase === 'DROP_ANIMATING') {
       const completed: CompletedDrag = state.completed;
-      if (!isMatchingType(type, completed.critical.droppable.type)) {
+      console.log('drop animating: drop, drag?');
+      if (!isMatchingType(completed.critical.droppable.type, type)) {
         return idleWithoutAnimation;
       }
 
@@ -188,7 +190,8 @@ export const makeMapStateToProps = (): Selector => {
 
     if (state.phase === 'IDLE' && state.completed && !state.shouldFlush) {
       const completed: CompletedDrag = state.completed;
-      if (!isMatchingType(type, completed.critical.droppable.type)) {
+      console.log('is idle: drop, drag?');
+      if (!isMatchingType(completed.critical.droppable.type, type)) {
         return idleWithoutAnimation;
       }
 
